@@ -14,5 +14,21 @@ public class TelefoniMudel {
         this.mudel = mudel;
         this.valjatulekuKp = valjatulekuKp;
         this.hind = hind;
-    }   
+    }
+
+    public String getMark() {
+        return mark;
+    }
+    
+    public String getMudel() {
+        return mudel;
+    }
+
+    public String getTaisnimi() {
+        return taisnimi;
+    }
+
+    public int getHind() {
+        return hind;
+    }
 }
