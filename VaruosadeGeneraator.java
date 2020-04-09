@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 class VaruosadeGeneraator {
 
@@ -58,7 +59,7 @@ class VaruosadeGeneraator {
             int teenuseHind = arvutaTeenusehind(mudel, varuosaJaTooteHinnasuhe);
             double omaHind = arvutaVaruosaOmahind(teenuseHind);
             int kogus = suvaline.nextInt(30);
-            List<Integer> jaotus = jaotaKogusJagudeVahelJuhuslikult(kogus, esindusteHulk);
+            List<Integer> jaotus = jaotaKogusJagudeVahelJuhuslikultKaaludega(kogus, esindusteHulk, new int[]{6, 2, 2});
             VaruosaJaotus varuosaJaotus = new VaruosaJaotus(
                 mudel, 
                 varuosaLiik, 
@@ -102,7 +103,7 @@ class VaruosadeGeneraator {
     }
 
     private static void loeTelefoniMudelidFailist() {
-        String laoseisFailiTee = "C:\\Users\\roost\\Documents\\Java-VaruosadeGeneraator\\" + mudelidFail;
+        String laoseisFailiTee = "C:\\Users\\roost\\desktop\\Java-VaruosadeGeneraator\\" + mudelidFail;
         BufferedReader br = null;
         String csvEraldaja = ",";
         
@@ -184,6 +185,27 @@ class VaruosadeGeneraator {
         for (int i = 0; i < kogus; i++) {
             int suvalineArv = suvaline.nextInt(jagudeHulk);
             jaotus.set(suvalineArv, jaotus.get(suvalineArv) + 1);
+        }
+        return jaotus;
+    }
+
+    private static List<Integer> jaotaKogusJagudeVahelJuhuslikultKaaludega(int kogus, int jagudeHulk, int[] kaalud) {
+        Random suvaline = new Random();
+        List<Integer> jaotus = new ArrayList<>();
+        while (jaotus.size() < jagudeHulk) {
+            jaotus.add(0);
+        }
+        int kaaludeSumma = IntStream.of(kaalud).sum();
+        for (int i = 0; i < kogus; i++) {
+            int suvalineArv = suvaline.nextInt(kaaludeSumma);
+            int kaaluKogus = 0;
+            for (int j = 0; j < jagudeHulk; j++) {
+                kaaluKogus += kaalud[j];
+                if (suvalineArv < kaaluKogus) {
+                    jaotus.set(j, jaotus.get(j) + 1);
+                    break;
+                }
+            }
         }
         return jaotus;
     }

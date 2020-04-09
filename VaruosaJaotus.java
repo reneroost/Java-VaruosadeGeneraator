@@ -41,7 +41,8 @@ public class VaruosaJaotus {
             this.mudel.getMudel() + "," +
             this.varuosaLiik + "," +
             this.varuosaOmahind + "," + 
-            this.teenuseHind;
+            this.teenuseHind + "," +
+            this.kogus;
         for (Integer arv: jaotus) {
             rida += "," + arv; 
         }
@@ -50,7 +51,7 @@ public class VaruosaJaotus {
     }
 
     public String tabeliPealkiri() {
-        String pealkiri = String.format("%-12s%-20s%-15s%-15s%-15s%-10s",
+        String pealkiri = String.format("%-12s%-20s%-15s%-16s%-15s%-10s",
         "Mark", "Mudel", "Varuosa liik", "Varuosa omahind", "Teenuse hind", "Kogus");
         for (int i = 0; i < jaotus.size(); i++) {
             pealkiri += String.format("%-10s", "Esindus " + (i + 1));
@@ -59,7 +60,7 @@ public class VaruosaJaotus {
     }
 
     public String tabeliRida() {
-        String rida = String.format("%-12s%-20s%-15s%-15s%-15s%-10s",
+        String rida = String.format("%-12s%-20s%-15s%-16s%-15s%-10s",
                 this.mudel.getMark(), this.mudel.getMudel(), this.varuosaLiik, this.varuosaOmahind, this.teenuseHind, this.kogus);
         for (Integer arv: jaotus) {
             rida += String.format("%-10s", arv);
